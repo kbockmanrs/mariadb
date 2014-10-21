@@ -16,6 +16,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
+cookbook_file "/etc/init.d/mysql" do
+  mode '0700'
+  source "mysql"
+end
+
 package 'mariadb-server' do
   action :install
   notifies :create, 'directory[/var/log/mysql]', :immediately
