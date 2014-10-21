@@ -16,7 +16,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-package 'MariaDB-server' do
+package 'mariadb-server' do
   action :install
   notifies :create, 'directory[/var/log/mysql]', :immediately
   notifies :start, 'service[mysql]', :immediately
