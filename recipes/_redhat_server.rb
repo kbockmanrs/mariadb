@@ -24,6 +24,7 @@ end
 package 'mariadb-server' do
   action :install
   notifies :create, 'directory[/var/log/mysql]', :immediately
+  notifies :run, 'execute[mysql_install_db]', :immediately
   notifies :start, 'service[mysql]', :immediately
   notifies :run, 'execute[change first install root password]', :immediately
 end
@@ -33,6 +34,11 @@ directory '/var/log/mysql' do
   user 'mysql'
   group 'mysql'
   mode '0755'
+end
+
+execute 'mysql_install_db' do
+  command 'mysql_install_db --user=mysql'
+  action :nothing
 end
 
 execute 'change first install root password' do
